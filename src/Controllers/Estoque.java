@@ -4,42 +4,37 @@
  */
 package Controllers;
 
-import Entities.Produto;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import Entities.MenuFormulario;
 
 /**
  *
  * @author user 
  */
 public class Estoque {
-    private JPanel Pane;
+    private final MenuFormulario Menu;
     
     public Estoque() {
-        Pane = new JPanel();
+        Menu = new MenuFormulario();
         
-        GridLayout Grid = new GridLayout(5, 1, 0, 5);
-        JTextField Name = new JTextField(30);
-        Pane.setLayout(Grid);
-        Pane.add(new JLabel("Name"));
-        Pane.add(Name);
+        String Opcoes[] = {"A", "B", "C", "D", "F", "G"};
         
-        JTextField Amount = new JTextField(30);
-        Pane.add(new JLabel("Amount"));
-
-        Amount.setAlignmentY(SwingConstants.BOTTOM);
-        Pane.add(Amount);    
+        Menu.CriarCampoDeTexto("Nome");
+        Menu.CriarCampoDeTexto("Preco");
+        Menu.CriarCampoDeTexto("Quantidade");
+        Menu.CriarCampoDeTexto("Minimo");
+        Menu.CriarCampoDeTexto("Codigo");
+        Menu.CriarCampoDeOpcoes("Fornecedores", Opcoes);
    }
+
+    public MenuFormulario getMenu() {
+        return Menu;
+    }
     
     
-    public void Show() {
+    /*public void Mostrar() {
         String Opcoes[] = {"Adicionar produto", "Remover produto"};
         
-        JOptionPane.showConfirmDialog(null, Pane);
+        JOptionPane.showConfirmDialog(null, this.Menu);
         
         int Selecionado = 0;
         //int Selected = JOptionPane.showOptionDialog(null, "Choose an option", "Product Manager", 0, 0, null, Options, this);
@@ -50,5 +45,5 @@ public class Estoque {
             
             
         }
-    }
+    }*/
 }

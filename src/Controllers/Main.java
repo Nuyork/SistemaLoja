@@ -4,15 +4,20 @@
  */
 package Controllers;
 
+import Entities.MenuFormulario;
+
 /**
  *
  * @author user
  */
 public class Main {
     public static void main(String[] args) {
-        Estoque NewStorage = new Estoque();
+        Estoque NovoEstoque = new Estoque();
         
-        NewStorage.Show();
+        MenuFormulario MenuEstoque = NovoEstoque.getMenu();
+        MenuEstoque.Mostrar();
+        System.out.println(MenuEstoque.PegarValorDoCampo("Fornecedores"));
+        
+        
     }
-    
 }
