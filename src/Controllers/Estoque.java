@@ -4,8 +4,9 @@
  */
 package Controllers;
 
-import Entities.Product;
+import Entities.Produto;
 import java.awt.GridLayout;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -15,10 +16,10 @@ import javax.swing.SwingConstants;
  *
  * @author user 
  */
-public class Storage {
+public class Estoque {
     private JPanel Pane;
     
-    public Storage() {
+    public Estoque() {
         Pane = new JPanel();
         
         GridLayout Grid = new GridLayout(5, 1, 0, 5);
@@ -36,18 +37,16 @@ public class Storage {
     
     
     public void Show() {
-        String Options[] = {"Add product", "Remove product"};
+        String Opcoes[] = {"Adicionar produto", "Remover produto"};
         
         JOptionPane.showConfirmDialog(null, Pane);
         
-        int Selected = 0;
+        int Selecionado = 0;
         //int Selected = JOptionPane.showOptionDialog(null, "Choose an option", "Product Manager", 0, 0, null, Options, this);
         
-        if (Selected == 0) {
-            Product NewProduct = new Product();
-            
-            String Name = JOptionPane.showInputDialog("Insert Name");
-            NewProduct.setName(Name);
+        if (Selecionado == 0) {
+            Produto NovoProduto = new Produto();
+     
             
             
         }

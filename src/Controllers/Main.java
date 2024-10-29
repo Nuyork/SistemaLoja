@@ -10,7 +10,7 @@ package Controllers;
  */
 public class Main {
     public static void main(String[] args) {
-        Storage NewStorage = new Storage();
+        Estoque NewStorage = new Estoque();
         
         NewStorage.Show();
     }

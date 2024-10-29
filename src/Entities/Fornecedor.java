@@ -8,10 +8,6 @@ package Entities;
  *
  * @author user
  */
-public class Category {
+public class Fornecedor {
     private String Name;
-
-    public Category(String Name) {
-        this.Name = Name;
-    }
 }

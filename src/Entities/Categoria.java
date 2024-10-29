@@ -8,6 +8,10 @@ package Entities;
  *
  * @author user
  */
-public class Supplier {
-    private String Name;
+public class Categoria {
+    private String Nome;
+
+    public Categoria(String Nome) {
+        this.Nome = Nome;
+    }
 }
