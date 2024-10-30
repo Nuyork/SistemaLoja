@@ -4,7 +4,9 @@
  */
 package Controllers;
 
+import Entities.GerenciadorProdutos;
 import Entities.MenuFormulario;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,12 +14,17 @@ import Entities.MenuFormulario;
  */
 public class Main {
     public static void main(String[] args) {
-        Estoque NovoEstoque = new Estoque();
+        GerenciadorProdutos ControladorProdutos = new GerenciadorProdutos();
         
-        MenuFormulario MenuEstoque = NovoEstoque.getMenu();
-        MenuEstoque.Mostrar();
-        System.out.println(MenuEstoque.PegarValorDoCampo("Fornecedores"));
+        String Opcoes[] = {"Adicionar produto", "Editar produto", "Remover produto"};
         
+        int Selecao = JOptionPane.showOptionDialog(null, "Escolha uma opcao", "Gerenciador", 0, 0, null, Opcoes, null);
+        
+        if (Selecao == 0) {
+            ControladorProdutos.AbrirCriacaoProduto();
+            
+            
+        }
         
     }
 }

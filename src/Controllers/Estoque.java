@@ -4,31 +4,14 @@
  */
 package Controllers;
 
-import Entities.MenuFormulario;
+import Entities.GerenciadorProdutos;
 
 /**
  *
  * @author user 
  */
 public class Estoque {
-    private final MenuFormulario Menu;
     
-    public Estoque() {
-        Menu = new MenuFormulario();
-        
-        String Opcoes[] = {"A", "B", "C", "D", "F", "G"};
-        
-        Menu.CriarCampoDeTexto("Nome");
-        Menu.CriarCampoDeTexto("Preco");
-        Menu.CriarCampoDeTexto("Quantidade");
-        Menu.CriarCampoDeTexto("Minimo");
-        Menu.CriarCampoDeTexto("Codigo");
-        Menu.CriarCampoDeOpcoes("Fornecedores", Opcoes);
-   }
-
-    public MenuFormulario getMenu() {
-        return Menu;
-    }
     
     
     /*public void Mostrar() {

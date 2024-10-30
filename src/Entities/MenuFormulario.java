@@ -29,13 +29,13 @@ public class MenuFormulario {
         GridLayout Grid = new GridLayout(5, 4, 25, 1);
         
         Pane.setLayout(Grid);
-        Pane.setPreferredSize(new Dimension(500, 300));
+        Pane.setPreferredSize(new Dimension(500, 150));
         
         Campos = new HashMap<>();
     }
     
-    public void Mostrar() {
-        JOptionPane.showConfirmDialog(null, Pane, "Adicionando produto", 0);
+    public int Mostrar(String Header) {
+        return JOptionPane.showConfirmDialog(null, Pane, Header, 0);
     }
     
     public void CriarCampoDeTexto(String Nome) {
@@ -93,7 +93,9 @@ public class MenuFormulario {
         
         Pane.add(PaneCampo);
         
-        Campos.put(Nome, Lista);        
+        Campos.put(Nome, Lista);
+        
+        
     };
     
 }
