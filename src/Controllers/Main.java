@@ -1,11 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controllers;
 
-import Entities.GerenciadorProdutos;
+import Entities.Categoria;
+import Entities.Fornecedor;
 import Entities.MenuFormulario;
+import Persistence.Categorias;
+import Persistence.Fornecedores;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,16 +14,29 @@ import javax.swing.JOptionPane;
 public class Main {
     public static void main(String[] args) {
         GerenciadorProdutos ControladorProdutos = new GerenciadorProdutos();
+        GerenciadorFornecedores ControladorFornecedores = new GerenciadorFornecedores();
         
-        String Opcoes[] = {"Adicionar produto", "Editar produto", "Remover produto"};
+        Fornecedores.AdicionarFornecedor(new Fornecedor("Generico"));
+        Categorias.AdicionarCategoria(new Categoria("Nenhuma"));
         
-        int Selecao = JOptionPane.showOptionDialog(null, "Escolha uma opcao", "Gerenciador", 0, 0, null, Opcoes, null);
+        String Opcoes[] = {"Adicionar produto", "Editar produto", "Remover produto", "Adicionar fornecedor"};
         
-        if (Selecao == 0) {
-            ControladorProdutos.AbrirCriacaoProduto();
-            
-            
-        }
+        int UltimaOpcao = 0;
         
+        do {
+            int Selecao = JOptionPane.showOptionDialog(null, "Escolha uma opcao", "Gerenciador", 0, 0, null, Opcoes, null);
+
+            if (Selecao == 0) {
+                ControladorProdutos.AbrirCriacaoProduto();
+            }
+            else if (Selecao == 1) {
+                ControladorProdutos.AbrirEdicaoDeProduto(ProdutoSelecionado);
+            }
+            else if (Selecao == 3) {
+                ControladorFornecedores.AbrirCriacaoDeFornecedor();
+            }
+
+            UltimaOpcao = Selecao;
+        }while (UltimaOpcao != -1);
     }
 }

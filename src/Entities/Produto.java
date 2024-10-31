@@ -10,12 +10,27 @@ package Entities;
  */
 public class Produto {
     private String Nome;
-    private Integer Quantidade;
-    private Integer Minimo;
+    private Float Quantidade;
+    private Float Minimo;
     private Float Preco;
     private String Codigo;
     private Fornecedor Fornecedor;
     private Categoria Categoria;
+
+    public Produto() {
+    }
+
+    public Produto(String Nome, Float Quantidade, Float Minimo, Float Preco, String Codigo, Fornecedor Fornecedor, Categoria Categoria) {
+        this.Nome = Nome;
+        this.Quantidade = Quantidade;
+        this.Minimo = Minimo;
+        this.Preco = Preco;
+        this.Codigo = Codigo;
+        this.Fornecedor = Fornecedor;
+        this.Categoria = Categoria;
+    }
+    
+    
 
     public String getNome() {
         return Nome;
@@ -25,19 +40,19 @@ public class Produto {
         this.Nome = Nome;
     }
 
-    public Integer getQuantidade() {
+    public Float getQuantidade() {
         return Quantidade;
     }
 
-    public void setQuantidade(Integer Quantidade) {
+    public void setQuantidade(Float Quantidade) {
         this.Quantidade = Quantidade;
     }
 
-    public Integer getMinimo() {
+    public Float getMinimo() {
         return Minimo;
     }
 
-    public void setMinimo(Integer Minimo) {
+    public void setMinimo(Float Minimo) {
         this.Minimo = Minimo;
     }
 

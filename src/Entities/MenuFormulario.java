@@ -4,10 +4,13 @@
  */
 package Entities;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.HashMap;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -35,7 +38,7 @@ public class MenuFormulario {
     }
     
     public int Mostrar(String Header) {
-        return JOptionPane.showConfirmDialog(null, Pane, Header, 0);
+        return JOptionPane.showConfirmDialog(null, Pane, Header, 2);
     }
     
     public void CriarCampoDeTexto(String Nome) {
@@ -55,20 +58,54 @@ public class MenuFormulario {
         Campos.put(Nome, Campo);
     }
     
+    public Object PegarCampo(String Nome) {
+        return Campos.get(Nome);
+    }
+    
     public String PegarValorDoCampo(String Nome) {
         
         if (Campos.get(Nome) instanceof JTextField) {
             JTextField Campo = (JTextField) Campos.get(Nome);
 
             return Campo.getText();
-        }else if (Campos.get(Nome) instanceof JList) {
-            JList Campo;
-            Campo = (JList) Campos.get(Nome);
+        }else if (Campos.get(Nome) instanceof JComboBox) {
+            JComboBox Campo = (JComboBox) Campos.get(Nome);
             
-            return (String) Campo.getSelectedValue();
+            return (String) Campo.getSelectedItem();
         }
         
         return "";
+    }
+    
+    public void CriarComboBox(String Nome, Object Opcoes[]) {
+        JPanel PaneCampo = new JPanel();
+        
+        DefaultComboBoxModel Model = new DefaultComboBoxModel();
+        
+        JComboBox Combo = new JComboBox(Opcoes);
+        Combo.setModel(Model);
+        
+        JLabel NomeCampo = new JLabel(Nome);
+        
+        NomeCampo.setPreferredSize(new Dimension(100, 15));
+        Combo.setPreferredSize(new Dimension(120, 30));
+
+        PaneCampo.add(NomeCampo);
+        PaneCampo.add(Combo);
+        
+        Pane.add(PaneCampo);
+        
+        Campos.put(Nome, Combo);
+    }
+    
+    public void AtualizarComboBox(String Nome, Object Opcoes[]) {
+        JComboBox Campo = (JComboBox) PegarCampo(Nome);
+        
+        Campo.removeAllItems();
+        
+        for (Object Opcao : Opcoes) {
+            Campo.add(Opcao);
+        }
     }
     
     public void CriarCampoDeOpcoes(String Nome, String Opcoes[]) {
@@ -94,8 +131,19 @@ public class MenuFormulario {
         Pane.add(PaneCampo);
         
         Campos.put(Nome, Lista);
-        
-        
     };
+    
+    public void EditarCampoDeTexto(String NomeCampo, String Valor) {
+        JTextField Campo = (JTextField) PegarCampo(NomeCampo);
+        
+        Campo.setText(Valor);
+    }
+    
+    public void EditarCampoDeOpcoes(String NomeCampo, Object Valor) {
+        JList Campo = (JList) PegarCampo(NomeCampo);
+    
+        Campo.setSelectedValue(Valor, true);
+    }
+    
     
 }
