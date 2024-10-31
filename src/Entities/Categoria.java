@@ -18,6 +18,11 @@ public class Categoria {
     public String getNome() {
         return Nome;
     }
+
+    @Override
+    public String toString() {
+        return getNome();
+    }
     
     
 }

@@ -39,8 +39,8 @@ public class GerenciadorProdutos {
         Menu.CriarCampoDeTexto("Quantidade");
         Menu.CriarCampoDeTexto("Minimo");
         Menu.CriarCampoDeTexto("Codigo");
-        Menu.CriarComboBox("Fornecedores", Opcoes);
-        Menu.CriarCampoDeOpcoes("Categoria", Opcoes);
+        Menu.CriarComboBox("Fornecedor", Opcoes);
+        Menu.CriarComboBox("Categoria", Opcoes);
         Menu.CriarComboBox("Test", Opcoes);
         
         MenuProdutos.CriarCampoDeSelecao("Produtos", Opcoes);
@@ -77,7 +77,8 @@ public class GerenciadorProdutos {
     }
          
     public void AbrirCriacaoProduto() {
-        Menu.AtualizarComboBox("Fornecedores", Fornecedores.getListaFornecedores().values().toArray());
+        Menu.AtualizarComboBox("Fornecedor", Fornecedores.getListaFornecedores().values().toArray());
+        Menu.AtualizarComboBox("Categoria", Categorias.getListaCategorias().values().toArray());
         
         Integer Opcao = Menu.Mostrar("Criando produto");
 

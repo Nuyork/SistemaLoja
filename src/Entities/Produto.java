@@ -29,8 +29,6 @@ public class Produto {
         this.Fornecedor = Fornecedor;
         this.Categoria = Categoria;
     }
-    
-    
 
     public String getNome() {
         return Nome;

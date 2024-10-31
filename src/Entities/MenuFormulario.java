@@ -100,11 +100,12 @@ public class MenuFormulario {
     
     public void AtualizarComboBox(String Nome, Object Opcoes[]) {
         JComboBox Campo = (JComboBox) PegarCampo(Nome);
+        DefaultComboBoxModel Model = (DefaultComboBoxModel) Campo.getModel();
         
         Campo.removeAllItems();
         
         for (Object Opcao : Opcoes) {
-            Campo.add(Opcao);
+            Model.addElement(Opcao);
         }
     }
     
