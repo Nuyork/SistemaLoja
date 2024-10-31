@@ -30,7 +30,7 @@ public class Main {
                 ControladorProdutos.AbrirCriacaoProduto();
             }
             else if (Selecao == 1) {
-                ControladorProdutos.AbrirEdicaoDeProduto(ProdutoSelecionado);
+            ControladorProdutos.AbrirEdicaoDeProduto();
             }
             else if (Selecao == 3) {
                 ControladorFornecedores.AbrirCriacaoDeFornecedor();

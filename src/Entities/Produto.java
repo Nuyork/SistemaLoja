@@ -86,6 +86,11 @@ public class Produto {
         this.Categoria = Categoria;
     }
 
+    @Override
+    public String toString() {
+        return getNome();
+    }
+
     
     
     

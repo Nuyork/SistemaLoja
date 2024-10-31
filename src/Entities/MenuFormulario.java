@@ -4,7 +4,6 @@
  */
 package Entities;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.HashMap;
@@ -17,6 +16,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import Entities.Fornecedor;
+import java.util.Map;
 
 /**
  *
@@ -56,6 +57,18 @@ public class MenuFormulario {
         Pane.add(PaneCampo);
         
         Campos.put(Nome, Campo);
+    }
+    
+    public void LimparCampos() {
+        for (Map.Entry<String, Object> entry : Campos.entrySet()) {
+            Object Valor = entry.getValue();
+            
+            if (Valor instanceof JTextField) {
+                ((JTextField) Valor).setText("");
+            }else if (Valor instanceof JComboBox) {
+                ((JComboBox) Valor).setSelectedIndex(0);
+            }
+        }
     }
     
     public Object PegarCampo(String Nome) {
@@ -105,7 +118,7 @@ public class MenuFormulario {
         Campo.removeAllItems();
         
         for (Object Opcao : Opcoes) {
-            Model.addElement(Opcao);
+            Model.addElement(Opcao.toString());
         }
     }
     
@@ -134,16 +147,22 @@ public class MenuFormulario {
         Campos.put(Nome, Lista);
     };
     
+    public void ToggleCampo(String NomeDoCampo, Boolean Ativo) {
+        JTextField Campo = (JTextField) PegarCampo(NomeDoCampo);
+        
+        Campo.setEditable(Ativo);
+    }
+    
     public void EditarCampoDeTexto(String NomeCampo, String Valor) {
         JTextField Campo = (JTextField) PegarCampo(NomeCampo);
         
         Campo.setText(Valor);
     }
     
-    public void EditarCampoDeOpcoes(String NomeCampo, Object Valor) {
-        JList Campo = (JList) PegarCampo(NomeCampo);
+    public void EditarComboBox(String NomeCampo, Object Valor) {
+        JComboBox Campo = (JComboBox) PegarCampo(NomeCampo);
     
-        Campo.setSelectedValue(Valor, true);
+        Campo.setSelectedItem(Valor);
     }
     
     

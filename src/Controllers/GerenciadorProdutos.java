@@ -19,6 +19,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -41,8 +42,6 @@ public class GerenciadorProdutos {
         Menu.CriarCampoDeTexto("Codigo");
         Menu.CriarComboBox("Fornecedor", Opcoes);
         Menu.CriarComboBox("Categoria", Opcoes);
-        Menu.CriarComboBox("Test", Opcoes);
-        
         MenuProdutos.CriarCampoDeSelecao("Produtos", Opcoes);
     }
     
@@ -56,10 +55,9 @@ public class GerenciadorProdutos {
         FornecedoresModel.removeAllElements();
         
         for (Map.Entry<String, Fornecedor> en : Fornecedores.getListaFornecedores().entrySet()) {
-            String Key = en.getKey();
             Fornecedor Value = en.getValue();
             
-            FornecedoresModel.addElement(Value);
+            FornecedoresModel.addElement(Value.getNome());
         }
     }
     
@@ -79,6 +77,9 @@ public class GerenciadorProdutos {
     public void AbrirCriacaoProduto() {
         Menu.AtualizarComboBox("Fornecedor", Fornecedores.getListaFornecedores().values().toArray());
         Menu.AtualizarComboBox("Categoria", Categorias.getListaCategorias().values().toArray());
+        
+        Menu.ToggleCampo("Nome", true);
+        Menu.LimparCampos();
         
         Integer Opcao = Menu.Mostrar("Criando produto");
 
@@ -122,29 +123,74 @@ public class GerenciadorProdutos {
         }
     }
     
-    public void AbrirSelecaoDeProduto() {
-        Produto ProdutosCadastrados[];
-        
-        MenuProdutos.CriarCampoDeSelecao("Produtos: ", Produtos.getListaProdutos().values().toArray());
+    public void AbrirEdicaoDeProduto() {
+        MenuProdutos.AtualizarComboBox("Produtos", Produtos.getListaProdutos().values().toArray());
         
         int Opcao = MenuProdutos.Mostrar("Selecione um produto para editar");
         
-        if (Opcao == JOptionPane.OK_OPTION) {
-            return 
+        if (Opcao != JOptionPane.OK_OPTION) {
+            return;
         }
-    }
-    
-    public void AbrirEdicaoDeProduto(Produto ProdutoSelecionado) {
-        MenuProdutos.AtualizarCampoDeSelecao("Produtos", Produtos.getListaProdutos().values().toArray());
-        MenuProdutos.Mostrar("Selecione um produto para editar");
+        
+        Produto ProdutoSelecionado = Produtos.getListaProdutos().get(MenuProdutos.PegarValorDoCampo("Produtos"));
+        
+        JTextField NomeCampo = (JTextField) Menu.PegarCampo("Nome");
+        NomeCampo.setEditable(false);
+        
+        Menu.ToggleCampo("Nome", false);
         
         Menu.EditarCampoDeTexto("Nome", ProdutoSelecionado.getNome());
         Menu.EditarCampoDeTexto("Codigo", ProdutoSelecionado.getCodigo());
         Menu.EditarCampoDeTexto("Preco", ProdutoSelecionado.getPreco().toString());
         Menu.EditarCampoDeTexto("Minimo", ProdutoSelecionado.getMinimo().toString());
         Menu.EditarCampoDeTexto("Quantidade", ProdutoSelecionado.getQuantidade().toString());
-        Menu.EditarCampoDeOpcoes("Fornecedor", ProdutoSelecionado.getFornecedor());
+        Menu.EditarComboBox("Fornecedor", ProdutoSelecionado.getFornecedor().getNome());
         
-        Menu.Mostrar("Editando produto: " + ProdutoSelecionado.getNome());
+        Opcao = Menu.Mostrar("Editando produto: " + ProdutoSelecionado.getNome());
+        
+        if (Opcao != JOptionPane.OK_OPTION) {
+            return;
+        }
+        
+        //String Nome = Menu.PegarValorDoCampo("Nome");
+        String Codigo = Menu.PegarValorDoCampo("Codigo");
+        String NomeFornecedor = Menu.PegarValorDoCampo("Fornecedor");
+        String NomeCategoria = Menu.PegarValorDoCampo("Categoria");
+        Float Preco = null;
+        Float Quantidade = null;
+        Float Minimo = null;
+
+        Fornecedor FornecedorSelecionado = Fornecedores.getListaFornecedores().get(NomeFornecedor);
+        Categoria CategoriaSelecionada = Categorias.getListaCategorias().get(NomeCategoria);
+
+        try{
+            Preco = Float.valueOf(Menu.PegarValorDoCampo("Preco"));
+            Minimo = Float.valueOf(Menu.PegarValorDoCampo("Minimo"));
+            Quantidade = Float.valueOf(Menu.PegarValorDoCampo("Quantidade"));
+        }catch(Exception Ex) {
+            if (Preco == null) {
+                Preco = 0f;
+            }
+
+            if (Quantidade == null) {
+                Quantidade = 0f;
+            }
+
+            if (Minimo == null) {
+                Minimo = 0f;
+            }
+        }
+
+        /*if (Nome.isBlank()) {
+            System.out.println("Nome nao pode ser vazio");
+        }*/
+        
+        //ProdutoSelecionado.setNome(Nome);
+        ProdutoSelecionado.setCodigo(Codigo);
+        ProdutoSelecionado.setQuantidade(Quantidade);
+        ProdutoSelecionado.setMinimo(Minimo);
+        ProdutoSelecionado.setPreco(Preco);
+        ProdutoSelecionado.setFornecedor(FornecedorSelecionado);
+        ProdutoSelecionado.setCategoria(CategoriaSelecionada);
     }
 }

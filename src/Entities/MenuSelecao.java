@@ -17,7 +17,7 @@ public class MenuSelecao extends MenuFormulario {
         CriarComboBox(Nome, Opcoes);
         
         JComboBox ComboBox = (JComboBox) PegarCampo(Nome);
-        ComboBox.setPreferredSize(new Dimension(180, 40));
+        ComboBox.setPreferredSize(new Dimension(200, 25));
     }
     
     

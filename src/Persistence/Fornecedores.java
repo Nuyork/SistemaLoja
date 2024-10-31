@@ -15,7 +15,7 @@ public class Fornecedores {
     private static HashMap<String, Fornecedor> ListaFornecedores = new HashMap();
     
     public static void AdicionarFornecedor(Fornecedor NovoFornecedor) {
-        ListaFornecedores.put(NovoFornecedor.getName(), NovoFornecedor);
+        ListaFornecedores.put(NovoFornecedor.getNome(), NovoFornecedor);
     }
 
     public static HashMap<String, Fornecedor> getListaFornecedores() {

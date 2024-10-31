@@ -9,19 +9,19 @@ package Entities;
  * @author user
  */
 public class Fornecedor {
-    private String Name;
+    private String Nome;
 
     public Fornecedor(String Name) {
-        this.Name = Name;
+        this.Nome = Name;
     }    
 
-    public String getName() {
-        return Name;
+    public String getNome() {
+        return Nome;
     }
 
     @Override
     public String toString() {
-        return getName();
+        return getNome();
     }
     
     
