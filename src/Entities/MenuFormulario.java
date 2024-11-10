@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import Entities.Fornecedor;
 import java.util.Map;
+import javax.swing.JButton;
 
 /**
  *
@@ -33,7 +34,7 @@ public class MenuFormulario {
         GridLayout Grid = new GridLayout(5, 4, 25, 1);
         
         Pane.setLayout(Grid);
-        Pane.setPreferredSize(new Dimension(500, 150));
+        Pane.setPreferredSize(new Dimension(500, 260));
         
         Campos = new HashMap<>();
     }
@@ -42,14 +43,14 @@ public class MenuFormulario {
         return JOptionPane.showConfirmDialog(null, Pane, Header, 2);
     }
     
-    public void CriarCampoDeTexto(String Nome) {
+    public JTextField CriarCampoDeTexto(String Nome) {
         JPanel PaneCampo = new JPanel();
         
         JLabel NomeCampo = new JLabel(Nome);
         JTextField Campo = new JTextField();
         
-        NomeCampo.setPreferredSize(new Dimension(100, 15));
-        Campo.setPreferredSize(new Dimension(120, 30));
+        NomeCampo.setPreferredSize(new Dimension(120, 15));
+        Campo.setPreferredSize(new Dimension(180, 30));
         
         PaneCampo.add(NomeCampo);
         PaneCampo.add(Campo);
@@ -57,6 +58,8 @@ public class MenuFormulario {
         Pane.add(PaneCampo);
         
         Campos.put(Nome, Campo);
+        
+        return Campo;
     }
     
     public void LimparCampos() {
@@ -85,6 +88,10 @@ public class MenuFormulario {
             JComboBox Campo = (JComboBox) Campos.get(Nome);
             
             return (String) Campo.getSelectedItem();
+        }else if (Campos.get(Nome) instanceof JList) {
+            JList Campo = (JList) Campos.get(Nome);
+            
+            return (String) Campo.getSelectedValue().toString();
         }
         
         return "";
@@ -111,6 +118,21 @@ public class MenuFormulario {
         Campos.put(Nome, Combo);
     }
     
+    public JButton CriarBotao(String Nome) {
+        JPanel PaneCampo = new JPanel();
+        
+        JButton Botao = new JButton(Nome);
+        Botao.setPreferredSize(new Dimension(120, 24));
+        
+        PaneCampo.add(Botao);
+        
+        Pane.add(PaneCampo);
+        
+        Campos.put(Nome, Botao);
+        
+        return Botao;
+    }
+    
     public void AtualizarComboBox(String Nome, Object Opcoes[]) {
         JComboBox Campo = (JComboBox) PegarCampo(Nome);
         DefaultComboBoxModel Model = (DefaultComboBoxModel) Campo.getModel();
@@ -118,11 +140,23 @@ public class MenuFormulario {
         Campo.removeAllItems();
         
         for (Object Opcao : Opcoes) {
-            Model.addElement(Opcao.toString());
+            Model.addElement(Opcao.toString()); 
         }
     }
     
-    public void CriarCampoDeOpcoes(String Nome, String Opcoes[]) {
+    public void AtualizarCampoDeOpcoes(String Nome, Object Opcoes[]) {
+        JList Campo = (JList) PegarCampo(Nome);
+        
+        Campo.removeAll();
+        
+        DefaultListModel Model = (DefaultListModel) Campo.getModel();
+        
+        for (Object Opcao : Opcoes) {
+            Model.addElement(Opcao);   
+        }
+    }
+    
+    public void CriarCampoDeOpcoes(String Nome) {
         JPanel PaneCampo = new JPanel();
         
         DefaultListModel ListModel = new DefaultListModel();
@@ -137,10 +171,6 @@ public class MenuFormulario {
 
         PaneCampo.add(NomeCampo);
         PaneCampo.add(Scroll);
-        
-        for (String Opcao : Opcoes) {
-            ListModel.addElement(Opcao);
-        }
         
         Pane.add(PaneCampo);
         

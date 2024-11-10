@@ -13,9 +13,12 @@ import Entities.Produto;
 import Persistence.Categorias;
 import Persistence.Fornecedores;
 import Persistence.Produtos;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -28,10 +31,12 @@ import javax.swing.JTextField;
 public class GerenciadorProdutos {
     private final MenuFormulario Menu;
     private final MenuSelecao MenuProdutos;
+    private final MenuSelecao MenuDeletar;
     
     public GerenciadorProdutos() {
         Menu = new MenuFormulario();
         MenuProdutos = new MenuSelecao();
+        MenuDeletar = new MenuSelecao();
         
         String Opcoes[] = {};
         
@@ -42,7 +47,17 @@ public class GerenciadorProdutos {
         Menu.CriarCampoDeTexto("Codigo");
         Menu.CriarComboBox("Fornecedor", Opcoes);
         Menu.CriarComboBox("Categoria", Opcoes);
+        
+        /*button.addActionListener(new ActionListener() {
+        
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Button clicked!");
+        }
+        });*/
+        
         MenuProdutos.CriarCampoDeSelecao("Produtos", Opcoes);
+    
+        MenuDeletar.CriarCampoDeSelecao("Produtos", Opcoes);
     }
     
     public MenuFormulario GetMenu() {
@@ -117,13 +132,32 @@ public class GerenciadorProdutos {
                 System.out.println("Nome nao pode ser vazio");
             }
             
-            
             Produto NovoProduto = new Produto(Nome, Quantidade, Minimo, Preco, Codigo, FornecedorSelecionado, CategoriaSelecionada);
             Produtos.AdicionarFornecedor(NovoProduto);
         }
     }
     
+    public void AbrirDeletarProduto() {
+        MenuDeletar.AtualizarComboBox("Produtos", Produtos.getListaProdutos().values().toArray());
+        
+        int Opcao = MenuDeletar.Mostrar("Deletando produto");
+        
+        if (Opcao == JOptionPane.YES_OPTION) {
+            String NomeProduto = MenuDeletar.PegarValorDoCampo("Produtos");
+            
+            if (NomeProduto.isBlank()) {
+                return;
+            }
+            
+            if (Produtos.getListaProdutos().containsKey(NomeProduto)) {
+                Produtos.getListaProdutos().remove(NomeProduto);
+            }
+        }
+    }
+    
     public void AbrirEdicaoDeProduto() {
+        Menu.AtualizarComboBox("Fornecedor", Fornecedores.getListaFornecedores().values().toArray());
+        Menu.AtualizarComboBox("Categoria", Categorias.getListaCategorias().values().toArray());
         MenuProdutos.AtualizarComboBox("Produtos", Produtos.getListaProdutos().values().toArray());
         
         int Opcao = MenuProdutos.Mostrar("Selecione um produto para editar");
