@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class Produtos {
     private static HashMap<String, Produto> ListaProdutos = new HashMap();
     
-    public static void AdicionarFornecedor(Produto NovoProduto) {
+    public static void AdicionarProduto(Produto NovoProduto) {
         ListaProdutos.put(NovoProduto.getNome(), NovoProduto);
     }
 

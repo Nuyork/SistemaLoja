@@ -5,39 +5,16 @@
 package Controllers;
 
 import Entities.Fornecedor;
-import Entities.MenuFormulario;
-import Entities.MenuFormulario;
 import Persistence.Fornecedores;
-import javax.swing.JOptionPane;
 
 /**
  *
- * @author user
+ * @author User
  */
 public class GerenciadorFornecedores {
-    private MenuFormulario Menu;
-
-    public GerenciadorFornecedores() {
-        Menu = new MenuFormulario();
-        
-        Menu.CriarCampoDeTexto("Nome");
+    public static void CriarFornecedor(String Nome) {
+        Fornecedor NovoFornecedor = new Fornecedor(Nome);
+            
+        Fornecedores.AdicionarFornecedor(NovoFornecedor);
     }
-    
-    public void AbrirCriacaoDeFornecedor() {
-        Integer Opcao = Menu.Mostrar("Criando novo fornecedor");
-        
-        if (Opcao == JOptionPane.YES_OPTION) {
-            String Nome = Menu.PegarValorDoCampo("Nome");
-            
-            if (Nome.isBlank()) {
-                System.out.println("Nome nao pode ser vazio");
-            }
-            
-            Fornecedor NovoFornecedor = new Fornecedor(Nome);
-            
-            Fornecedores.AdicionarFornecedor(NovoFornecedor);
-        }
-    }
-    
-    
 }
