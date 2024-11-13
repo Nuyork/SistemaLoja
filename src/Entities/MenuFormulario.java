@@ -43,6 +43,22 @@ public class MenuFormulario {
         return JOptionPane.showConfirmDialog(null, Pane, Header, 2);
     }
     
+    public JLabel CriarLabel(String Texto) {
+        JPanel PaneCampo = new JPanel();
+        
+        JLabel Label = new JLabel(Texto);
+        
+        Label.setPreferredSize(new Dimension(200, 30));
+        
+        PaneCampo.add(Label);
+        
+        Pane.add(PaneCampo);
+        
+        Campos.put(Texto, Label);
+        
+        return Label;
+    }
+    
     public JTextField CriarCampoDeTexto(String Nome) {
         JPanel PaneCampo = new JPanel();
         

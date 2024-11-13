@@ -16,11 +16,12 @@ public class Main {
         MenuProdutos ControladorProdutos = new MenuProdutos();
         MenuFornecedores ControladorFornecedores = new MenuFornecedores();
         MenuVendas ControladorVendas = new MenuVendas();
+        MenuRelatoriosProdutos ControladorRelatoriosProdutos = new MenuRelatoriosProdutos();
         
         Fornecedores.AdicionarFornecedor(new Fornecedor("Generico"));
         Categorias.AdicionarCategoria(new Categoria("Nenhuma"));
         
-        String Opcoes[] = {"Adicionar produto", "Editar produto", "Remover produto", "Adicionar fornecedor", "Adicionar categoria", "Registrar Venda"};
+        String Opcoes[] = {"Adicionar produto", "Editar produto", "Remover produto", "Adicionar fornecedor", "Adicionar categoria", "Registrar Venda", "Ver relatorios dos produtos"};
         
         int UltimaOpcao = 0;
         
@@ -43,6 +44,9 @@ public class Main {
             }
             else if (Selecao == 5) {
                 ControladorVendas.AbrirCaixa();
+            }
+            else if (Selecao == 6) {
+                ControladorRelatoriosProdutos.Abrir();
             }
 
             UltimaOpcao = Selecao;

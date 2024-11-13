@@ -5,9 +5,7 @@ import Entities.Produto;
 import Persistence.Produtos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -52,6 +50,7 @@ public class MenuVendas {
                 
                 QuantidadeProdutos -= 1;
                 ValorCompra -= ProdutoSelecionado.getPreco();
+                ProdutoSelecionado.setTotalVendido(ProdutoSelecionado.getTotalVendido() - 1);
                 Menu.EditarCampoDeTexto("Valor da compra: ", ValorCompra + "R$");
             }
         });
@@ -72,8 +71,10 @@ public class MenuVendas {
                 Model.add(0, Selecionado);
                 
                 QuantidadeProdutos += 1;
+                
                 ValorCompra += ProdutoSelecionado.getPreco();
                 Menu.EditarCampoDeTexto("Valor da compra: ", ValorCompra + "R$");
+                ProdutoSelecionado.setTotalVendido(ProdutoSelecionado.getTotalVendido() + 1);
                 
                 System.out.println("Button clicked!");
             }

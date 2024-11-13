@@ -12,7 +12,16 @@ public class Produto {
     private String Nome;
     private Float Quantidade;
     private Float Minimo;
+
+    public Float getTotalVendido() {
+        return TotalVendido;
+    }
+
+    public void setTotalVendido(Float TotalVendido) {
+        this.TotalVendido = TotalVendido;
+    }
     private Float Preco;
+    private Float TotalVendido;
     private String Codigo;
     private Fornecedor Fornecedor;
     private Categoria Categoria;
